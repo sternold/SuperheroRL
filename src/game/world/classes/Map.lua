@@ -4,13 +4,17 @@ function Map:initialize(w, d, h)
     self.depth = d
     self.height = h
     self.boxes = {}
+    self.lightmap = {}
     for z=1, h, 1 do
         table.insert(self.boxes, z, {})
+        table.insert(self.lightmap, z, {})
         print("z"..z.." created")
         for x=1, w, 1 do
             table.insert(self.boxes[z], x, {}) 
+            table.insert(self.lightmap[z], x, {}) 
             for y=1, d, 1 do
                 table.insert(self.boxes[z][x], y, Box(BoxType.Air))
+                table.insert(self.lightmap[z][x], y, {0, 0, 0, 255})
             end
         end
     end

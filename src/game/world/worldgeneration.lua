@@ -9,6 +9,7 @@ function world_generator.generate(w, d, h)
         end
     end
     
+    --buildings
     local cells = world_generator.cellify(map, 16)
     world_generator.create_buildings(map, cells, 3)
 
@@ -72,12 +73,14 @@ end
 function world_generator.create_buildings(map, cells, roadsize)
     print("creating buildings...")
     for k,v in pairs(cells) do
-        print("x"..v.x.."y"..v.y.."w"..v.w.."h"..v.h)
         local x = v.x + 2
         local y = v.y + 2
+        local z = 1
         local w = v.w-1 - roadsize
-        local h = v.h-1 - roadsize
-        local bu = Structure("building", x, y, 2, w, h, 1)
+        local d = v.h-1 - roadsize   
+        local h = love.math.random(2, map.height - z)           
+        print("x"..x.."y"..y.."z"..z.."w"..w.."d"..d.."h"..h)
+        local bu = Structure("building", x, y, z, w, d, h)
         for i=bu.x1, bu.x2 do
             for j=bu.y1, bu.y2 do
                 map.boxes[1][j][i] = Box(BoxType.Floor)
@@ -97,12 +100,16 @@ function world_generator.create_buildings(map, cells, roadsize)
         local cx, cy = bu:center()
         local choice = love.math.random(1, 4)
         if choice == 1 then
+            map.boxes[1][cy][bu.x1] = Box(BoxType.Dirt)
             map.boxes[2][cy][bu.x1] = Box(BoxType.Air)
         elseif choice == 2 then 
+            map.boxes[1][cy][bu.x2] = Box(BoxType.Dirt)
             map.boxes[2][cy][bu.x2] = Box(BoxType.Air)
         elseif choice == 3 then 
+            map.boxes[1][bu.y1][cx] = Box(BoxType.Dirt)
             map.boxes[2][bu.y1][cx] = Box(BoxType.Air)
         elseif choice == 4 then 
+            map.boxes[1][bu.y2][cx] = Box(BoxType.Dirt)
             map.boxes[2][bu.y2][cx] = Box(BoxType.Air)
         end
     end

@@ -6,6 +6,7 @@ console             = require("libraries/loveconsole")
 screenmanager       = require("libraries/screenmanager")
 camera              = require("libraries/camera")
 colors              = require("libraries/colors")
+fov                 = require("libraries/improvedshadowcasting")
 --classes
 require("game/world/classes/Map")
 require("game/world/classes/Box")

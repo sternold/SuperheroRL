@@ -24,7 +24,7 @@ function game.new_game()
     local time = os.clock()
 
     local worldgen = require("game/world/worldgeneration")
-    game.data.map = worldgen.generate(512, 512, 4)
+    game.data.map = worldgen.generate(512, 512, 16)
     game.data.player = Player(GameObject(2, 10, 10, "@", "player", colors.yellow, true))
 
     --debug
