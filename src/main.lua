@@ -9,6 +9,7 @@ colors              = require("libraries/colors")
 --classes
 require("game/world/classes/Map")
 require("game/world/classes/Box")
+require("game/world/classes/Structure")
 require("game/classes/GameObject")
 require("game/classes/Player")
 --modules
@@ -21,6 +22,7 @@ CONF_FILE = "conf.rl"
 function register()
     bitser.registerClass(Box)
     bitser.registerClass(Map)
+    bitser.registerClass(Structure)
     bitser.registerClass(GameObject)
     bitser.registerClass(Player)
 end

@@ -2,6 +2,7 @@ BoxType = {
     Wall        = {blocked=true, block_sight=true, color=colors.dark_yellow},
     Grass       = {blocked=true, block_sight=true, color=colors.dark_green},
     Dirt        = {blocked=true, block_sight=true, color=colors.dark_orange},
+    Road        = {blocked=true, block_sight=true, color=colors.grey_6},
     Air         = {blocked=false, block_sight=false, color={0, 0, 0, 0}}
 }
 

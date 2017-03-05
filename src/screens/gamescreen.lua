@@ -11,6 +11,7 @@ function gamescreen.new()
     function self:draw()
         draw_world()
         draw_data()
+        draw_minimap(1, 63, 45)
     end
 
     function self:keypressed(key)
@@ -26,6 +27,29 @@ function gamescreen.new()
     function draw_world()
         game.data.map:draw(game.data.player.character.z)
         game.data.player.character:draw()
+    end
+
+    function draw_minimap(z, mx, my)
+        local scale = 4
+        local function drawpip(color, x, y)
+            love.graphics.setColor(color)
+            love.graphics.rectangle("fill", mx*console.scale+x*scale, my*console.scale+y*scale, scale, scale)
+            love.graphics.setColor(colors.white)
+        end
+        --outline
+        love.graphics.setColor(colors.dark_red)
+        love.graphics.rectangle("line", mx*console.scale, my*console.scale, (camera.width+1)*scale, (camera.height+1)*scale)
+        love.graphics.setColor(colors.white)
+        --map
+        for x=0, camera.width do
+            for y=0, camera.height do
+                local b = game.data.map.boxes[z][x+camera.x+1][y+camera.y+1]
+                drawpip(b.color, x, y)
+            end
+        end
+        --player
+        local drawx, drawy = camera.coordinates(game.data.player.character.x, game.data.player.character.y)
+        drawpip(game.data.player.character.color, drawx, drawy)
     end
 
     function draw_data()
