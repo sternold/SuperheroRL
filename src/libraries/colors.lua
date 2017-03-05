@@ -1,4 +1,4 @@
-colors = {
+local colors = {
     light_red       = {250, 50,   50,   255},
     red             = {250, 0,    0,    255},
     dark_red        = {150, 0,    0,    255},
@@ -38,6 +38,16 @@ colors = {
     black           = {0,   0,    0,    255},
 }
 
+function colors.translucent(color)
+    return {color[1], color[2], color[3], 100}
+end
+
+function colors.intensify(color, rate)
+    return {color[1] + rate, color[2] + rate, color[3] + rate, color[4]}
+end
+
 function colors.random()
     return table.random(colors)
 end
+
+return colors

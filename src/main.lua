@@ -1,20 +1,28 @@
 --libraries
+require("libraries/util")
 class               = require("libraries/middleclass")
 bitser              = require("libraries/bitser")
 console             = require("libraries/loveconsole")
 screenmanager       = require("libraries/screenmanager")
 camera              = require("libraries/camera")
-fov                 = require("libraries/improvedshadowcasting")
-require("libraries/colors")
-require("libraries/util")
+colors              = require("libraries/colors")
+--classes
+require("game/world/classes/Map")
+require("game/world/classes/Box")
+require("game/classes/GameObject")
+require("game/classes/Player")
 --modules
-
+game                = require("game/game")
 
 --constants
 SAVE_FILE = "save.rl"
 CONF_FILE = "conf.rl"
 
 function register()
+    bitser.registerClass(Box)
+    bitser.registerClass(Map)
+    bitser.registerClass(GameObject)
+    bitser.registerClass(Player)
 end
 
 function love.load()
@@ -27,14 +35,15 @@ function love.load()
     
     --window
     console.init(80, 60, 16)
+    camera.init(60, 50)
     love.keyboard.setKeyRepeat(true)
 
     --initialize screen managers
     local screens = {
-        main = require("screens/mainscreen")
-        
+        main = require("screens/mainscreen"),
+        game = require("screens/gamescreen")
     }
-    screenmanager.init(screens, "main")
+    screenmanager.init(screens, "game")
     screenmanager.registerCallbacks()
 end
 
