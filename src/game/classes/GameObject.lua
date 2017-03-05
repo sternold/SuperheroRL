@@ -24,7 +24,7 @@ end
 
 function GameObject:draw()
     local x, y = camera.coordinates(self.x, self.y)
-    console.drawText(self.char, x, y, self.color)
+    console.drawText(self.char, x, y, self.color, 1, -1)
 end
 
 function GameObject:move_towards(target_x, target_y)

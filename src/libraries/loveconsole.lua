@@ -38,7 +38,13 @@ function love.graphics.console.point(x, y)
 end
 function  love.graphics.console.drawRect(mode, x, y, w, h, color)
      love.graphics.setColor(color)
-     love.graphics.rectangle(mode, x * love.graphics.console.scale, y * love.graphics.console.scale, w * love.graphics.console.scale, h * love.graphics.console.scale)
+     if mode == "grid" then
+        love.graphics.rectangle("fill", x * love.graphics.console.scale, y * love.graphics.console.scale, w * love.graphics.console.scale, h * love.graphics.console.scale)
+        love.graphics.setColor(colors.black)
+        love.graphics.rectangle("line", x * love.graphics.console.scale, y * love.graphics.console.scale, w * love.graphics.console.scale, h * love.graphics.console.scale)
+     else
+        love.graphics.rectangle(mode, x * love.graphics.console.scale, y * love.graphics.console.scale, w * love.graphics.console.scale, h * love.graphics.console.scale)
+     end 
      love.graphics.setColor(colors.white)
 end
 function  love.graphics.console.drawProgressBar(x, y, total_width, name, value, maximum, bar_color, back_color)

@@ -11,7 +11,7 @@ function gamescreen.new()
     function self:draw()
         draw_world()
         draw_data()
-        draw_minimap(1, 63, 45)
+        --draw_minimap(1, 63, 45)
     end
 
     function self:keypressed(key)
