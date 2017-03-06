@@ -26,6 +26,9 @@ function gamescreen.new()
 
     function draw_world()
         game.data.map:draw(game.data.player.character.z)
+        for k, v in pairs(game.data.map.objects) do
+            v:draw()
+        end
         game.data.player.character:draw()
     end
 

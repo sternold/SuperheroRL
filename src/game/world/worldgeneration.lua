@@ -10,8 +10,8 @@ function world_generator.generate(w, d, h)
     end
     
     --buildings
-    local cells = world_generator.cellify(map, 16)
-    world_generator.create_buildings(map, cells, 3)
+    local cells = world_generator.cellify(map, 24)
+    world_generator.create_buildings(map, cells, 6)
 
     return map
 end
@@ -97,6 +97,8 @@ function world_generator.create_buildings(map, cells, roadsize)
             end
         end
         
+        world_generator.create_npcs(map, bu)
+
         local cx, cy = bu:center()
         local choice = love.math.random(1, 4)
         if choice == 1 then
@@ -112,6 +114,22 @@ function world_generator.create_buildings(map, cells, roadsize)
             map.boxes[1][bu.y2][cx] = Box(BoxType.Dirt)
             map.boxes[2][bu.y2][cx] = Box(BoxType.Air)
         end
+    end
+end
+
+function world_generator.create_npcs(map, struct)
+    local max_npcs = struct.z2
+    local num_npcs = love.math.random(0, max_npcs)
+    for i=0, num_npcs do
+        --choose random spot for this npc
+        local z = 2
+        local x = love.math.random(struct.x1+1, struct.x2-1)
+        local y = love.math.random(struct.y1+1, struct.y2-1)
+        
+         if not map:is_blocked(z, x, y) then   
+            local npc = GameObject(z, x, y, "n", "npc", colors.random(), true, BasicAI())
+            table.insert(map.objects, npc)
+        end 
     end
 end
 

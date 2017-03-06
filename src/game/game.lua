@@ -24,7 +24,7 @@ function game.new_game()
     local time = os.clock()
 
     local worldgen = require("game/world/worldgeneration")
-    game.data.map = worldgen.generate(512, 512, 16)
+    game.data.map = worldgen.generate(512, 512, 4)
     game.data.player = Player(GameObject(2, 10, 10, "@", "player", colors.yellow, true))
 
     --debug
@@ -35,6 +35,11 @@ end
 
 function game.update()
     camera.move(game.data.player.character.x, game.data.player.character.y, game.data.map.width, game.data.map.depth)
+    for k,v in pairs(game.data.map.objects) do
+        if v.ai then
+            v.ai:act()
+        end
+    end
 end
 
 return game

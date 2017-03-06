@@ -10,7 +10,7 @@ function GameObject:initialize(z, x, y, char, name, color, blocks, ai)
     self.color = color
     self.blocks = blocks or false
     self.ai = ai or nil
-    if self.ai ~= nil then
+    if self.ai then
         self.ai.owner = self
     end
 end
@@ -24,7 +24,9 @@ end
 
 function GameObject:draw()
     local x, y = camera.coordinates(self.x, self.y)
-    console.drawText(self.char, x, y, self.color, 1, -1)
+    if x~=nil and y~=nil then
+        console.drawText(self.char, x, y, self.color, 1, -1)
+    end
 end
 
 function GameObject:move_towards(target_x, target_y)

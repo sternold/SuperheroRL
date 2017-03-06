@@ -26,9 +26,13 @@ function Map:draw(z)
         if self.boxes[z][x] then
             for y=(camera.y+1), (camera.y+camera.height) do
                 if self.boxes[z-1] then
-                    console.drawRect("fill", x-camera.x, y-camera.y, 1, 1, self.boxes[z-1][x][y].color)
+                    if self.boxes[z-1][x][y].color[4] ~= 0 then
+                        console.drawRect("fill", x-camera.x, y-camera.y, 1, 1, self.boxes[z-1][x][y].color)
+                    end
                 end 
-                console.drawRect("fill", x-camera.x, y-camera.y, 1, 1, self.boxes[z][x][y].color)
+                if self.boxes[z][x][y].color[4] ~= 0 then
+                    console.drawRect("fill", x-camera.x, y-camera.y, 1, 1, self.boxes[z][x][y].color)
+                end
             end
         end
     end

@@ -47,7 +47,11 @@ function colors.intensify(color, rate)
 end
 
 function colors.random()
-    return table.random(colors)
+    local c = nil
+    while type(c) ~= "table" do
+        c = table.random(colors)
+    end
+    return c
 end
 
 return colors

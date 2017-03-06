@@ -13,6 +13,7 @@ require("game/world/classes/Box")
 require("game/world/classes/Structure")
 require("game/classes/GameObject")
 require("game/classes/Player")
+require("game/classes/AI")
 --modules
 game                = require("game/game")
 
